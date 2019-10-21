@@ -1,0 +1,44 @@
+<div>
+  <input type="text" placeholder="search" [(ngModel)]="userFilter.title">
+</div>
+<table class="table table-bordered" *ngIf="data">
+  <thead>
+    <td><b>title</b></td>
+    <td><b>url</b></td>
+    <td><b>created_at</b></td>
+    <td><b>author</b></td>
+  </thead>
+
+  <tbody>
+     
+    <tr *ngFor="let d of data|filterBy:userFilter" (click)="fun(d)"  data-toggle="modal" data-target="#myModal" 
+      (click)="highlightRow(d)" [ngClass]="{'highlight':d.title==selectedName}">
+      <td>{{d.title}}</td>
+      <td>{{d.url}}</td>
+      <td>{{d.created_at | date:'dd/MM/yyyy,h:mm a,EEEE' }}</td>
+      <td>{{d.author}}</td>
+      <!-- <td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal"(click)="button(d)">Click</button></td> -->
+      <!-- <tr *ngFor="let d of set | filterBy: term" (click)="click(d)"  data-toggle="modal" data-target="#myModal"> -->
+    </tr>
+  </tbody>
+  </table>
+  <div class="modal" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Details</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+          <div class="modal-body">
+            <!-- <p> <b>url:</b>  {{url}}</p>
+            <p><b>author:</b> {{author}}</p>
+            <p><b>created_at:</b> {{created_at}}</p>
+            <p><b>title: </b>{{title}}</p> -->
+            {{f|json}}
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
